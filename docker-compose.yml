@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  php-cli:
+    build:
+      context: docker
+    working_dir: /app
+    environment:
+      PHP_IDE_CONFIG: "serverName=algorithms"
+    volumes:
+      - ./:/app
+      - ${SSH_PRIVATE_KEY_PATH}:/root/.ssh/id_rsa
