@@ -25,6 +25,7 @@ echo 'Matrix: ' . PHP_EOL;
 foreach ($knapsackProblem->matrix as $item) {
     echo implode(' ', $item) . PHP_EOL;
 }
+
 echo PHP_EOL;
 echo 'Result: ' . PHP_EOL;
 print_r($result);
