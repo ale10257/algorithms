@@ -14,7 +14,8 @@ pecl install ds
 
 Использование:
 ```
-make cd-php
+make up
+make cd
 cd src/calculate/
 ./index.php
 ```
@@ -26,7 +27,8 @@ cd src/calculate/
 
 Использование:
 ```
-make cd-php
+make up
+make cd
 cd src/primeNumbers/
 ./index.php
 ```
@@ -37,7 +39,8 @@ cd src/primeNumbers/
 
 Использование:
 ```
-make cd-php
+make up
+make cd
 cd src/knapsackProblem/
 ./index.php
 ```
