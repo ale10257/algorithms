@@ -8,11 +8,12 @@ use ale10257\algorithms\arraySort\QuickSort;
 use ale10257\algorithms\arraySort\MergeSort;
 use ale10257\algorithms\arraySort\ArrToString;
 
-//for ($i = 0; $i < 1000000; $i++) {
-//    $arr[] = rand(10, 1000000);
-//}
+for ($i = 0; $i < 100000; $i++) {
+    $arr[] = rand(10, 1000000);
+}
 
-$arr = [64, 42, 73, 41, 32, 53, 16, 24, 57, 42, 74, 55, 36];
+$array = [64, 42, 73, 41, 32, 53, 16, 24, 57, 42, 74, 55, 36];
+//$arr = [64, 42, 73, 41, 32, 53, 16, 24, 57, 42, 74, 55, 36];
 //$start = microtime(true);
 //BubbleSort::sort($arr);
 //$time = round(microtime(true) - $start, 4);
@@ -24,10 +25,10 @@ $arr = [64, 42, 73, 41, 32, 53, 16, 24, 57, 42, 74, 55, 36];
 //$selectionSort->selectionSort($arr);
 //$time = round(microtime(true) - $start, 4);
 //echo 'Selection sort time: ' . $time . PHP_EOL;
-
-//$array = $arr;
+//
+////$array = $arr;
 //$quickSort = new QuickSort();
-//echo $quickSort->arrToString($arr) . PHP_EOL . PHP_EOL;
+////echo $quickSort->arrToString($arr) . PHP_EOL . PHP_EOL;
 //$start = microtime(true);
 //$quickSort->sort($arr);
 //$time = round(microtime(true) - $start, 4);
@@ -40,10 +41,14 @@ $arr = [64, 42, 73, 41, 32, 53, 16, 24, 57, 42, 74, 55, 36];
 //echo 'Quick sort time: ' . $time . PHP_EOL;
 //echo $quickSort->arrToString($arr) . PHP_EOL;
 
-$array = $arr;
+//$array = $arr;
+$start = microtime(true);
 $mergeSort = new MergeSort();
-echo ArrToString::arrToString($arr, false) . PHP_EOL;
-$mergeSort->sort($arr);
+$a = $mergeSort->mergeSort($array);
+//echo ArrToString::arrToString($a, false) . PHP_EOL;
+$time = round(microtime(true) - $start, 4);
+echo 'Merge sort time: ' . $time . PHP_EOL;
+//echo ArrToString::arrToString($arr, false) . PHP_EOL;
 //echo '========' . PHP_EOL;
 //echo ArrToString::arrToString($mergeSort->mergeSort($array), false) . PHP_EOL;
 //print_r($arr);

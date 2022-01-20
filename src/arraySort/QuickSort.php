@@ -61,7 +61,7 @@ class QuickSort
                 $leftIndex++;
             }
         }
-        $this->printSortStep($arr, $from, $to, $leftIndex, $pivotIndex);
+        //$this->printSortStep($arr, $from, $to, $leftIndex, $pivotIndex);
         return $leftIndex;
     }
 

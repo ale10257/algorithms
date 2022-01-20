@@ -4,63 +4,55 @@ namespace ale10257\algorithms\arraySort;
 
 class MergeSort
 {
-    public function sort(&$array)
+    private array $array;
+
+    public function sortMerge(array &$array)
     {
-        $dest = [];
+        $this->array = &$array;
         $size = 1;
-        $count = count($array);
-        $mergeSortDto = new MergeSortDto();
-        while (true) {
-            if ($size >= $count) {
-                unset($dest);
-                break;
-            }
+        $count = count($this->array);
+        while ($size < $count) {
             for ($i = 0; $i < $count; $i += 2 * $size) {
-                $mergeSortDto->arrayLeft = $array;
-                $mergeSortDto->arrayRight = $array;
-                $mergeSortDto->arrayLeftStart = $i;
-                $mergeSortDto->arrayRightStart = $i + $size;
-                //$mergeSortDto->dest = &$dest;
-                $mergeSortDto->destStart = $i;
-                $mergeSortDto->size = $size;
-                $this->mergeOptimizer($mergeSortDto);
+                $this->merge($i, $i + $size, $size);
             }
-            $tmp = $array;
-            $array = $dest;
-            $dest = $tmp;
             $size *= 2;
-            echo 'Tmp: ' . ArrToString::arrToString($tmp, false) . PHP_EOL;
-            echo 'Arr: ' . ArrToString::arrToString($array, false) . PHP_EOL . PHP_EOL;
+            //echo ArrToString::arrToString($this->array, false) . PHP_EOL;
         }
+        //return $this->array;
     }
 
-    private function mergeOptimizer(MergeSortDto $mergeSortDto) {
+    private function merge(int $leftIndex, int $rightIndex, int $size)
+    {
+        $dest = $this->array;
+        $count = count($this->array);
 
-        $arrayLeftIndex = $mergeSortDto->arrayLeftStart;
-        $arrayRightIndex = $mergeSortDto->arrayRightStart;
+        $arrayLeftEnd = min($leftIndex + $size, $count);
+        $arrayRightEnd = min($rightIndex + $size, $count);
 
-        $arrayLeftEnd = min($arrayLeftIndex + $mergeSortDto->size, count($mergeSortDto->arrayLeft));
-        $arrayRightEnd = min($arrayRightIndex + $mergeSortDto->size, count($mergeSortDto->arrayRight));
-
-        $count = count($mergeSortDto->arrayLeft);
-        if ($arrayLeftIndex + $mergeSortDto->size > $count) {
-            for ($i = $arrayLeftIndex; $i < $arrayLeftEnd; $i++) {
-                $mergeSortDto->dest[$i] = $mergeSortDto->arrayLeft[$i];
-            }
+        if ($leftIndex + $size > $count) {
             return;
         }
 
-        $iterationCount = ($arrayLeftEnd - $mergeSortDto->arrayLeftStart) + ($arrayRightEnd - $mergeSortDto->arrayRightStart);
+        $iterationCount = $arrayLeftEnd + $arrayRightEnd - $rightIndex;
 
-        for ($i = $mergeSortDto->destStart; $i < $mergeSortDto->destStart + $iterationCount; $i++) {
-            if ($arrayLeftIndex < $arrayLeftEnd && ($arrayRightIndex >= $arrayRightEnd || $mergeSortDto->arrayLeft[$arrayLeftIndex] < $mergeSortDto->arrayRight[$arrayRightIndex])) {
-                $mergeSortDto->dest[$i] = $mergeSortDto->arrayLeft[$arrayLeftIndex];
-                $arrayLeftIndex++;
+        for ($i = $leftIndex; $i < $iterationCount; $i++) {
+            if (
+                $leftIndex < $arrayLeftEnd
+                &&
+                (
+                    $rightIndex >= $arrayRightEnd
+                    || $this->array[$leftIndex] < $this->array[$rightIndex]
+                )
+            ) {
+                $dest[$i] = $this->array[$leftIndex];
+                $leftIndex++;
             } else {
-                $mergeSortDto->dest[$i] = $mergeSortDto->arrayRight[$arrayRightIndex];
-                $arrayRightIndex++;
+                $dest[$i] = $this->array[$rightIndex];
+                $rightIndex++;
             }
         }
+        $this->array = $dest;
+        unset($dest);
     }
 
     public function mergeSort(array $arr): array
@@ -69,16 +61,19 @@ class MergeSort
         if ($count <= 1) {
             return $arr;
         }
-        $left  = array_slice($arr, 0, (int)($count/2));
-        $right = array_slice($arr, (int)($count/2));
+
+        $left = array_slice($arr, 0, (int)($count / 2));
+        $right = array_slice($arr, (int)($count / 2));
+
         $left = $this->mergeSort($left);
         $right = $this->mergeSort($right);
-        return $this->merge($left, $right);
+
+        return $this->mergeO($left, $right);
     }
 
-    private function merge(array $left, array $right): array
+    public function mergeO(array $left, array &$right)
     {
-        $ret = array();
+        $ret = [];
         while (count($left) > 0 && count($right) > 0) {
             if ($left[0] < $right[0]) {
                 $ret[] = array_shift($left);
@@ -86,8 +81,10 @@ class MergeSort
                 $ret[] = array_shift($right);
             }
         }
+
         array_splice($ret, count($ret), 0, $left);
         array_splice($ret, count($ret), 0, $right);
+
         return $ret;
     }
 }
