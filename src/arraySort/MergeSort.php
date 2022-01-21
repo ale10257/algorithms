@@ -55,36 +55,38 @@ class MergeSort
         unset($dest);
     }
 
-    public function mergeSort(array $arr): array
+    public function mergeSort(array $arr, int $size = 1): array|null
     {
-        $count = count($arr);
-        if ($count <= 1) {
+        if ($size >= count($arr)) {
             return $arr;
         }
-
-        $left = array_slice($arr, 0, (int)($count / 2));
-        $right = array_slice($arr, (int)($count / 2));
-
-        $left = $this->mergeSort($left);
-        $right = $this->mergeSort($right);
-
-        return $this->mergeO($left, $right);
-    }
-
-    public function mergeO(array $left, array &$right)
-    {
-        $ret = [];
-        while (count($left) > 0 && count($right) > 0) {
-            if ($left[0] < $right[0]) {
-                $ret[] = array_shift($left);
-            } else {
-                $ret[] = array_shift($right);
+        if ($size === 1) {
+            $count = count($arr);
+            for ($i = 1; $i < $count; $i += 2) {
+                if ($arr[$i - 1] > $arr[$i]) {
+                    $tmp =  $arr[$i];
+                    $arr[$i] = $arr[$i - 1];
+                    $arr[$i - 1] = $tmp;
+                }
             }
+            $size *= 2;
         }
-
-        array_splice($ret, count($ret), 0, $left);
-        array_splice($ret, count($ret), 0, $right);
-
-        return $ret;
+        $arrays = array_chunk($arr, $size);
+        $arr = [];
+        while ($arrays) {
+            $left = array_shift($arrays) ?: [];
+            $right = array_shift($arrays) ?: [];
+            while ($left && $right) {
+                if ($left[0] < $right[0]) {
+                    $arr[] = array_shift($left);
+                } else {
+                    $arr[] = array_shift($right);
+                }
+            }
+            $arr = array_merge($arr, $left, $right);
+        }
+        //echo ArrToString::arrToString($arr, false) . PHP_EOL;
+        $this->mergeSort($arr, $size * 2);
+        return null;
     }
 }
