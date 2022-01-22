@@ -20,6 +20,8 @@ class BubbleSort implements ISort
                 }
             }
         }
-        echo "Количество перестановок: $i" . PHP_EOL;
+        if ($i === 0) {
+            echo 'The array has already been sorted' . PHP_EOL;
+        }
     }
 }
