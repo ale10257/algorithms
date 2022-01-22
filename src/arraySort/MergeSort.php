@@ -2,7 +2,7 @@
 
 namespace ale10257\algorithms\arraySort;
 
-class MergeSort implements ISort
+class MergeSort extends BaseSort
 {
     public function sort(array &$arr)
     {
@@ -43,6 +43,9 @@ class MergeSort implements ISort
                 }
             }
             $arr = $dest;
+            if ($this->steps) {
+                echo ArrToString::arrToString($arr) . PHP_EOL;
+            }
             $dest = [];
             $size *= 2;
         }

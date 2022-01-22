@@ -8,37 +8,42 @@ use ale10257\algorithms\arraySort\QuickSort;
 use ale10257\algorithms\arraySort\MergeSort;
 use ale10257\algorithms\arraySort\ArrToString;
 
-for ($i = 0; $i < 10000; $i++) {
-    $arr[] = rand(10, 1000000);
-}
-
-$arrayCopy = $arr;
-$bubbleSort = new BubbleSort();
-
+//for ($i = 0; $i < 10000; $i++) {
+//    $arr[] = rand(10, 1000000);
+//}
+//
+//$arrayCopy = $arr;
+//$bubbleSort = new BubbleSort();
+//$bubbleSort->stepByStep();
+//
 $selectionSort = new SelectionSort();
-$start = microtime(true);
-$selectionSort->sort($arr);
-$time = round(microtime(true) - $start, 4);
-echo 'Selection sort time: ' . $time . PHP_EOL;
-$bubbleSort->sort($arr);
-echo PHP_EOL;
+$selectionSort->stepByStep();
+//$start = microtime(true);
+//$selectionSort->sort($arr);
+//$time = round(microtime(true) - $start, 4);
+//echo 'Selection sort time: ' . $time . PHP_EOL;
+//$bubbleSort->sort($arr);
+//echo PHP_EOL;
 
 //$arr = $arrayCopy;
-$quickSort = new QuickSort();
-$start = microtime(true);
-$quickSort->sort($arr);
-$time = round(microtime(true) - $start, 4);
-echo 'Quick sort time: ' . $time . PHP_EOL;
-$bubbleSort->sort($arr);
-echo PHP_EOL;
+//$quickSort = new QuickSort();
+//$quickSort->stepByStep();
 
-$arr = $arrayCopy;
-$mergeSort = new MergeSort();
-$start = microtime(true);
-$mergeSort->sort($arr);
-$time = round(microtime(true) - $start, 4);
-echo 'Merge sort time: ' . $time . PHP_EOL;
-//echo ArrToString::arrToString($arr, false) . PHP_EOL;
-$bubbleSort->sort($arr);
-echo PHP_EOL;
+//$start = microtime(true);
+//$quickSort->sort($arr);
+//$time = round(microtime(true) - $start, 4);
+//echo 'Quick sort time: ' . $time . PHP_EOL;
+//$bubbleSort->sort($arr);
+//echo PHP_EOL;
+//
+//$arr = $arrayCopy;
+//$mergeSort = new MergeSort();
+//$mergeSort->stepByStep();
+//$start = microtime(true);
+//$mergeSort->sort($arr);
+//$time = round(microtime(true) - $start, 4);
+//echo 'Merge sort time: ' . $time . PHP_EOL;
+////echo ArrToString::arrToString($arr, false) . PHP_EOL;
+//$bubbleSort->sort($arr);
+//echo PHP_EOL;
 

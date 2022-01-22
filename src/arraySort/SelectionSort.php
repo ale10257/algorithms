@@ -2,7 +2,7 @@
 
 namespace ale10257\algorithms\arraySort;
 
-class SelectionSort implements ISort
+class SelectionSort extends BaseSort
 {
     public function sort(array &$arr)
     {
@@ -15,6 +15,9 @@ class SelectionSort implements ISort
             $current = $arr[$i];
             $arr[$i] = $arr[$min];
             $arr[$min] = $current;
+            if ($this->steps) {
+                echo ArrToString::arrToString($arr) . PHP_EOL;
+            }
         }
     }
 

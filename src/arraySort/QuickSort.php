@@ -2,7 +2,7 @@
 
 namespace ale10257\algorithms\arraySort;
 
-class QuickSort implements ISort
+class QuickSort extends BaseSort
 {
     public function sort(array &$arr)
     {
@@ -42,15 +42,15 @@ class QuickSort implements ISort
                 $leftIndex++;
             }
         }
-        //$this->printSortStep($arr, $from, $to, $leftIndex, $pivotIndex);
+        if ($this->steps) {
+            $this->printSortStep($arr, $from, $to, $leftIndex, $pivotIndex, $pivot);
+        }
         return $leftIndex;
     }
 
-    private function printSortStep(array $arr, int $from, int $to, int $partitionIndex, $pivotIndex)
+    private function printSortStep(array $arr, int $from, int $to, int $partitionIndex, int $pivotIndex, int $pivot)
     {
-        echo 'from:' . $from . ' ' . 'to: ' . $to . ' ' . 'pivotIndex: ' . $pivotIndex . PHP_EOL;
-        echo 'partitionIndex: ' . $partitionIndex . PHP_EOL;
-        echo ArrToString::arrToString($arr) . PHP_EOL;
+        echo 'from:' . $from . ' ' . 'to: ' . $to . ' ' . 'pivotIndex: ' . $pivotIndex . ' ' . 'pivot: ' . $pivot . PHP_EOL;
         $left = $right = [];
         for ($i = $from; $i < $partitionIndex; $i++) {
             $left[] = $arr[$i];
@@ -58,7 +58,8 @@ class QuickSort implements ISort
         for ($i = $partitionIndex; $i < $to + 1; $i++) {
             $right[] = $arr[$i];
         }
-        echo 'Left: ' . ArrToString::arrToString($left) . ' ' . 'Right: ' . ArrToString::arrToString($right);
-        echo PHP_EOL . PHP_EOL;
+        echo 'Left: ' . ArrToString::arrToString($left) . ' ' . 'Right: ' . ArrToString::arrToString($right) . PHP_EOL;
+        echo 'Current array: ' . ArrToString::arrToString($arr) . PHP_EOL;
+        echo PHP_EOL;
     }
 }
