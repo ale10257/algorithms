@@ -12,43 +12,30 @@ for ($i = 0; $i < 100000; $i++) {
     $arr[] = rand(10, 1000000);
 }
 
-$array = [64, 42, 73, 41, 32, 53, 16, 24, 57, 42, 74, 55, 36];
-//$arr = [64, 42, 73, 41, 32, 53, 16, 24, 57, 42, 74, 55, 36];
-//$start = microtime(true);
-//BubbleSort::sort($arr);
-//$time = round(microtime(true) - $start, 4);
-//echo 'Bubble sort time: ' . $time . PHP_EOL;
-////
-//
+$arrayCopy = $arr;
+$bubbleSort = new BubbleSort();
+
 //$selectionSort = new SelectionSort();
 //$start = microtime(true);
 //$selectionSort->selectionSort($arr);
 //$time = round(microtime(true) - $start, 4);
 //echo 'Selection sort time: ' . $time . PHP_EOL;
-//
-////$array = $arr;
-//$quickSort = new QuickSort();
-////echo $quickSort->arrToString($arr) . PHP_EOL . PHP_EOL;
-//$start = microtime(true);
-//$quickSort->sort($arr);
-//$time = round(microtime(true) - $start, 4);
-//echo 'Quick optimize sort time: ' . $time . PHP_EOL;
-//echo $quickSort->arrToString($arr) . PHP_EOL;
+//BubbleSort::sort($arr);
 
-//$start = microtime(true);
-//$array = $quickSort->quickSort($array);
-//$time = round(microtime(true) - $start, 4);
-//echo 'Quick sort time: ' . $time . PHP_EOL;
-//echo $quickSort->arrToString($arr) . PHP_EOL;
-
-//$array = $arr;
+//$arr = $arrayCopy;
+$quickSort = new QuickSort();
 $start = microtime(true);
+$quickSort->sort($arr);
+$time = round(microtime(true) - $start, 4);
+echo 'Quick sort time: ' . $time . PHP_EOL;
+$bubbleSort->sort($arr);
+
+$arr = $arrayCopy;
 $mergeSort = new MergeSort();
-$mergeSort->mergeSort($arr);
-//echo ArrToString::arrToString($array, false) . PHP_EOL;
+$start = microtime(true);
+$mergeSort->sort($arr);
 $time = round(microtime(true) - $start, 4);
 echo 'Merge sort time: ' . $time . PHP_EOL;
 //echo ArrToString::arrToString($arr, false) . PHP_EOL;
-//echo '========' . PHP_EOL;
-//echo ArrToString::arrToString($mergeSort->mergeSort($array), false) . PHP_EOL;
-//print_r($arr);
+$bubbleSort->sort($arr);
+

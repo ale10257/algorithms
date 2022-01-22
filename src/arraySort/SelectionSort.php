@@ -2,9 +2,9 @@
 
 namespace ale10257\algorithms\arraySort;
 
-class SelectionSort
+class SelectionSort implements ISort
 {
-    public function selectionSort(array $arr): array
+    public function sort(array &$arr)
     {
         $count = count($arr);
         for ($i = 0; $i < $count; $i++) {
@@ -16,7 +16,6 @@ class SelectionSort
             $arr[$i] = $arr[$min];
             $arr[$min] = $current;
         }
-        return $arr;
     }
 
     public function min(array $arr, int $index = 0): int

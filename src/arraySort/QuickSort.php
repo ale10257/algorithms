@@ -2,39 +2,20 @@
 
 namespace ale10257\algorithms\arraySort;
 
-class QuickSort
+class QuickSort implements ISort
 {
     public function sort(array &$arr)
     {
-        $this->quickSortOptimizer($arr, 0, count($arr) - 1);
+        $this->quickSort($arr, 0, count($arr) - 1);
     }
 
-    private function quickSortOptimizer(array &$arr, int $from, int $to)
+    private function quickSort(array &$arr, int $from, int $to)
     {
         if ($from < $to) {
             $divideIndex = $this->partition($arr, $from, $to);
-            $this->quickSortOptimizer($arr, $from, $divideIndex - 1);
-            $this->quickSortOptimizer($arr, $divideIndex, $to);
+            $this->quickSort($arr, $from, $divideIndex - 1);
+            $this->quickSort($arr, $divideIndex, $to);
         }
-    }
-
-    public function quickSort(array $arr): array
-    {
-        if (count($arr) < 2) {
-            return $arr;
-        } else {
-            $pivot = $arr[0];
-            $left = $right = [];
-            for ($i = 1; $i < count($arr); $i++) {
-                if ($arr[$i] <= $pivot) {
-                    $left[] = $arr[$i];
-                }
-                if ($arr[$i] > $pivot) {
-                    $right[] = $arr[$i];
-                }
-            }
-        }
-        return array_merge($this->quickSort($left), [$pivot], $this->quickSort($right));
     }
 
     private function partition(array &$arr, int $from, int $to): int

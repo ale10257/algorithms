@@ -2,22 +2,24 @@
 
 namespace ale10257\algorithms\arraySort;
 
-class BubbleSort
+class BubbleSort implements ISort
 {
-    public static function sort(array $array): array
+    public function sort(array &$arr)
     {
         $isSorted = false;
+        $i = 0;
         while (!$isSorted) {
             $isSorted = true;
-            foreach ($array as $key => $item) {
-                if ($key > 0 && $array[$key - 1] > $item) {
-                    $prev = $array[$key - 1];
-                    $array[$key - 1] = $item;
-                    $array[$key] = $prev;
+            foreach ($arr as $key => $item) {
+                if ($key > 0 && $arr[$key - 1] > $item) {
+                    $prev = $arr[$key - 1];
+                    $arr[$key - 1] = $item;
+                    $arr[$key] = $prev;
                     $isSorted = false;
+                    $i++;
                 }
             }
         }
-        return $array;
+        echo "Количество перестановок: $i" . PHP_EOL;
     }
 }
