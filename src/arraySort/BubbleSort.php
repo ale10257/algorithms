@@ -2,6 +2,8 @@
 
 namespace ale10257\algorithms\arraySort;
 
+use ale10257\algorithms\common\ArrToString;
+
 class BubbleSort extends BaseSort
 {
     private bool $isSorted = false;

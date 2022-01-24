@@ -1,11 +1,11 @@
 <?php
 
-namespace ale10257\algorithms\knapsackProblem;
+namespace ale10257\algorithms\backpack;
 
-class KnapsackProblem
+class Backpack
 {
     public int $maxWeight = 10;
-    /** @var ItemDto[] */
+    /** @var ItemBackPackDto[] */
     public array $items = [];
     public array $matrix = [];
     private array $result = [];
@@ -45,7 +45,7 @@ class KnapsackProblem
             $count--;
             $item = $this->items[$count];
             $this->result[] = [
-                'number' => $item->number,
+                'number' => $item->itemNumber,
                 'weight' => $item->weight,
                 'price' => $item->price,
             ];

@@ -2,6 +2,8 @@
 
 namespace ale10257\algorithms\arraySort;
 
+use ale10257\algorithms\common\ArrToString;
+
 class QuickSort extends BaseSort
 {
     public function sort(array &$arr)
